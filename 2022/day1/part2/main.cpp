@@ -1,9 +1,15 @@
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 
 #include "checkFile.h"
+
+bool mySort(int i, int j)
+{
+  return i > j;
+}
 
 int main (int argc, char *argv[])
 {  
@@ -24,15 +30,12 @@ int main (int argc, char *argv[])
     }
     std::string s;
     int tmpSum {};
-    int maxSum {};
+    std::vector<int> calories {};
     while (getline(file, s))
     {
       if (s == "")
       {
-        if (tmpSum > maxSum)
-        {
-          maxSum = tmpSum;
-        }
+        calories.push_back(tmpSum);
         tmpSum = 0;
       }
       else
@@ -41,7 +44,9 @@ int main (int argc, char *argv[])
 
       }
     }
-    std::cout << "Max calories: " << maxSum << std::endl;
+    std::sort(calories.begin(), calories.end(), mySort);
+    if (calories.size() > 2)
+      std::cout << "Sum calories of first three: " << calories[0] + calories[1] + calories[2] << std::endl;
     return EXIT_SUCCESS;
   }
   return EXIT_FAILURE; 
