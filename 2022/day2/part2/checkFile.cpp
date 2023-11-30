@@ -1,16 +1,16 @@
 #include <filesystem>
 
-#include "checkFile.h" 
+#include "checkFile.h"
 
 bool checkFile(std::string path)
 {
-  std::filesystem::path filepath {path};
-  if (std::filesystem::exists(filepath))
-  {
-    if (std::filesystem::is_regular_file(filepath))
+    std::filesystem::path filepath{path};
+    if (std::filesystem::exists(filepath))
     {
-      return true;
+        if (std::filesystem::is_regular_file(filepath))
+        {
+            return true;
+        }
     }
-  }
-  return false;
+    return false;
 }
